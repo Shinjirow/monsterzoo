@@ -43,7 +43,8 @@ public class Monsters {
     }
 
     public static Monster randomCall() {
-        return Monsters.monstersList.get((int) (Monsters.monstersList.size() * Math.random()));
+        int random = (int) (Monsters.monstersList.size() * Math.random());
+        return Monsters.monstersList.get(random);
     }
 
     public void add(Monster m) {
