@@ -30,7 +30,7 @@ public class Main {
     }
 
     private void printResult() {
-        System.out.println("ボールがなくなった！");
+        Printer.sendMessage("ボールがなくなった！");
         pz.printFinalResult();
     }
 }
