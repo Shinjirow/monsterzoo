@@ -19,9 +19,9 @@ public class MonsterZoo {
 
     //モンスター図鑑．モンスターの名前とレア度(0.0~9.0)がそれぞれの配列に保存されている
     //レア度が高いほうが捕まえにくい
-    List<String> monsterZukan = new ArrayList<>(22);
+    List<Monster> monsterZukan = new ArrayList<>(22);
     // String monsterZukan[] = new String[22];
-    List<Integer> monsterRare = new ArrayList<>(22);
+    // List<Integer> monsterRare = new ArrayList<>(22);
     // double monsterRare[] = new double[22];
 
     Trainer aTrainer = new Trainer();
@@ -46,17 +46,19 @@ public class MonsterZoo {
         return aTrainer.fruits;
     }
 
-    public List<String> getUserMonster() {
+    public List<Monster> getUserMonster() {
         return aTrainer.userMonster;
     }
 
-    public void setMonsterZukan(List<String> monsterZukan) {
+    public void setMonsterZukan(List<Monster> monsterZukan) {
         this.monsterZukan = monsterZukan;
     }
 
+    /*
     public void setMonsterRare(List<Integer> monsterRare) {
         this.monsterRare = monsterRare;
     }
+    */
 
     /*
     private void addDistanceToEggs() {
@@ -83,10 +85,16 @@ public class MonsterZoo {
             aTrainer.fruits = aTrainer.fruits + f;
             if (e >= 1) {//卵を1つ以上Getしたら
                 //egg[]に10個以上卵がない場合は新しい卵データをセットする
+                if (aTrainer.eggs.size() < 10) {
+                    aTrainer.eggs.add(new Egg());
+                }
+                /*
                 if (aTrainer.eggDistance.size() < 10) {
                     aTrainer.egg.add(true);
                     aTrainer.eggDistance.add(0);
                 }
+                */
+
                 /*
                 for (int i = 0; i < aTrainer.eggDistance.size(); i++) {
                     if (aTrainer.egg.get(i) == false) {
@@ -109,7 +117,7 @@ public class MonsterZoo {
                 }
                 System.out.println(this.monsterZukan.get(m) + "にボールを投げた");
                 aTrainer.balls--;
-                if (this.monsterRare.get(m) <= r) {//monsterRare[m]の値がr以下の場合
+                if (this.monsterZukan.get(m).getRare() <= r) {//monsterRare[m]の値がr以下の場合
                     System.out.println(this.monsterZukan.get(m) + "を捕まえた！");
                     aTrainer.userMonster.add(this.monsterZukan.get(m));
                     /*
@@ -130,8 +138,8 @@ public class MonsterZoo {
 
     private void hatch() {
         // 卵の孵化処理
-        for (int i = 0; i < aTrainer.egg.size(); i++) {
-            if (aTrainer.egg.get(i) == true && aTrainer.eggDistance.get(i) >= 3) {
+        for (int i = 0; i < aTrainer.eggs.size(); i++) {
+            if (aTrainer.eggs.get(i).canHatch()) {
                 System.out.println("卵が孵った！");
                 int m = (int) (this.monsterZukan.size() * Math.random());
                 System.out.println(this.monsterZukan.get(m) + "が産まれた！");
@@ -146,8 +154,7 @@ public class MonsterZoo {
                 }
                 */
 
-                aTrainer.egg.remove(i);
-                aTrainer.eggDistance.remove(i);
+                aTrainer.eggs.remove(i);
                 /*
                 aTrainer.egg.set(i, false);
                 aTrainer.eggDistance.set(i, 0);
