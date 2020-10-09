@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class MonsterZoo {
@@ -27,6 +28,10 @@ public class MonsterZoo {
 
     Trainer aTrainer = new Trainer();
 
+    public MonsterZoo(List<Monster> monsterZukan) {
+        this.monsterZukan = monsterZukan;
+    }
+
     //呼び出すと1km distanceが増える
     void move() {
         aTrainer.walk();
@@ -35,25 +40,15 @@ public class MonsterZoo {
         this.hatch();
     }
 
-    public double getDistance() {
-        return aTrainer.distance;
+    public boolean hasBalls() {
+        return aTrainer.balls > 0;
     }
 
-    public int getBalls() {
-        return aTrainer.balls;
-    }
-
-    public int getFruits() {
-        return aTrainer.fruits;
-    }
-
-    public List<Monster> getUserMonster() {
-        return aTrainer.userMonster;
-    }
-
+    /*
     public void setMonsterZukan(List<Monster> monsterZukan) {
         this.monsterZukan = monsterZukan;
     }
+    */
 
     /*
     public void setMonsterRare(List<Integer> monsterRare) {
@@ -121,7 +116,7 @@ public class MonsterZoo {
             }).forEach(r -> {
                 System.out.println(this.monsterZukan.get(m) + "にボールを投げた");
                 aTrainer.balls--;
-                if (this.monsterZukan.get(m).getRare() <= r) {//monsterRare[m]の値がr以下の場合
+                if (this.monsterZukan.get(m).canCatch(r)) {
                     System.out.println(this.monsterZukan.get(m) + "を捕まえた！");
                     aTrainer.userMonster.add(this.monsterZukan.get(m));
                     /*
@@ -193,5 +188,16 @@ public class MonsterZoo {
                 */
             }
         }
+    }
+
+    public void printCurrentResult() {
+        System.out.println("手持ちのボールは" + aTrainer.balls + "個，フルーツは" + aTrainer.fruits + "個");
+        System.out.println(aTrainer.distance + "km歩いた．");
+    }
+
+    public void printFinalResult() {
+        aTrainer.userMonster.stream()
+                .filter(Objects::nonNull)
+                .forEach(e -> System.out.println(e + "を捕まえた．"));
     }
 }

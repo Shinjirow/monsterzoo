@@ -1,9 +1,8 @@
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Main {
-    private MonsterZoo pz = new MonsterZoo();
+    private MonsterZoo pz;
 
     public static void main(String[] args) {
         new Main().run();
@@ -16,7 +15,8 @@ public class Main {
     }
 
     private void init() {
-        this.setMonsterZukan();
+        List<Monster> monsterZukan = this.createMonsterZukan();
+        this.pz = new MonsterZoo(monsterZukan);
     }
 
     private void loop() {
@@ -25,10 +25,9 @@ public class Main {
         while (true) {
             try {
                 Thread.sleep(1000);
-                if (pz.getBalls() > 0) {
+                if (pz.hasBalls()) {
                     pz.move();
-                    System.out.println("手持ちのボールは" + pz.getBalls() + "個，フルーツは" + pz.getFruits() + "個");
-                    System.out.println(pz.getDistance() + "km歩いた．");
+                    pz.printCurrentResult();
                 } else {
                     break;
                 }
@@ -40,10 +39,7 @@ public class Main {
 
     private void printResult() {
         System.out.println("ボールがなくなった！");
-
-        pz.getUserMonster().stream()
-                .filter(Objects::nonNull)
-                .forEach(e -> System.out.println(e + "を捕まえた．"));
+        pz.printFinalResult();
         /*
         for (int i = 0; i < pz.getUserMonster().size(); i++) {
             if (pz.getUserMonster().get(i) != null) {
@@ -53,7 +49,7 @@ public class Main {
     }
 
     //テスト用のモンスターデータを登録するメソッド
-    private void setMonsterZukan() {
+    private List<Monster> createMonsterZukan() {
         List<Monster> tempMonster = new ArrayList<>(22);
         // String tempMonster[] = new String[22];
         //List<Integer> tempMonsterRare = new ArrayList<>(22);
@@ -103,7 +99,8 @@ public class Main {
         tempMonster.add(new Monster("キタバー", 3));
         // tempMonsterRare.add(21, 3);
 
-        pz.setMonsterZukan(tempMonster);
+        // pz.setMonsterZukan(tempMonster);
         // pz.setMonsterRare(tempMonsterRare);
+        return tempMonster;
     }
 }

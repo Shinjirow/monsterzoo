@@ -8,12 +8,8 @@ public class Monster {
         this.rare = rare;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-    public int getRare() {
-        return this.rare;
+    public boolean canCatch(int r) {
+        return this.rare <= r;
     }
 
     @Override
