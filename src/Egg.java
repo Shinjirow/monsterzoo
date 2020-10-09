@@ -14,9 +14,9 @@ public class Egg {
     }
 
     public Monster hatch() {
-        System.out.println("卵が孵った！");
+        Printer.sendMessage("卵が孵った！");
         Monster newFace = Monsters.randomCall();
-        System.out.println(newFace + "が産まれた！");
+        Printer.sendMessage(newFace + "が産まれた！");
 
         return newFace;
     }

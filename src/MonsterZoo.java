@@ -26,11 +26,11 @@ public class MonsterZoo {
     }
 
     private void encounterZooStation() {
-        System.out.println("ズーstationを見つけた！");
+        Printer.sendMessage("ズーstationを見つけた！");
         int b = (int) (Math.random() * 3);//ball,fruits,eggがランダムに出る
         int f = (int) (Math.random() * 2);
         int e = (int) (Math.random() * 2);
-        System.out.println("ボールを" + b + "個，" + "フルーツを" + f + "個" + "卵を" + e + "個Getした！");
+        Printer.sendMessage("ボールを" + b + "個，" + "フルーツを" + f + "個" + "卵を" + e + "個Getした！");
         aUser.addBalls(b);
         aUser.addFruits(f);
         if (e >= 1) //卵を1つ以上Getしたら
@@ -40,7 +40,7 @@ public class MonsterZoo {
     private void encounterMonster() {
         //monsterZukanからランダムにモンスターを出す
         Monster m = Monsters.randomCall();
-        System.out.println(m + "が現れた！");
+        Printer.sendMessage(m + "が現れた！");
 
         aUser.tryToCatch(m);
     }

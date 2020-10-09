@@ -23,7 +23,6 @@ public class User {
         this.monsters.addEgg();
     }
 
-    // バグっています　要修正
     public void tryToCatch(Monster m) {
         for (int i = 0; i < this.items.chanceOfThrow(); i++) {
             if (this.challenge(m)) {
@@ -33,21 +32,21 @@ public class User {
     }
 
     private boolean challenge(Monster m) {
-        System.out.println(m + "にボールを投げた");
+        Printer.sendMessage(m + "にボールを投げた");
         this.items.spendBalls();
         if (m.canCatch(this.determineCaptureRate())) {
-            System.out.println(m + "を捕まえた！");
+            Printer.sendMessage(m + "を捕まえた！");
             this.monsters.addMonster(m);
             return true;
         }
-        System.out.println(m + "に逃げられた！");
+        Printer.sendMessage(m + "に逃げられた！");
         return false;
     }
 
     private int determineCaptureRate() {
         int r = (int) (6 * Math.random());//0~5までの数字をランダムに返す
         if (this.items.hasFruits()) {
-            System.out.println("フルーツを投げた！捕まえやすさが倍になる！");
+            Printer.sendMessage("フルーツを投げた！捕まえやすさが倍になる！");
             this.items.spendFruits();
             r = r * 2;
         }
@@ -59,14 +58,14 @@ public class User {
     }
 
     public void printCurrentResult() {
-        System.out.println(this.items);
-        System.out.println(this.distance + "km歩いた．");
+        Printer.sendMessage(this.items.toString());
+        Printer.sendMessage(this.distance + "km歩いた．");
     }
 
     public void printFinalResult() {
         this.monsters.streamMonsters()
                 .filter(Objects::nonNull)
-                .forEach(e -> System.out.println(e + "を捕まえた．"));
+                .forEach(e -> Printer.sendMessage(e + "を捕まえた．"));
     }
 
     public void walk() {
