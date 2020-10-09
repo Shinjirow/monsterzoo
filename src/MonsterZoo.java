@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 public class MonsterZoo {
     /*
@@ -108,6 +109,35 @@ public class MonsterZoo {
         } else if (flg1 >= 7) {
             int m = (int) (this.monsterZukan.size() * Math.random());//monsterZukanからランダムにモンスターを出す
             System.out.println(this.monsterZukan.get(m) + "が現れた！");
+
+            IntStream.range(0, Math.min(aTrainer.balls, 3)).map(i -> {
+                int r = (int) (6 * Math.random());//0~5までの数字をランダムに返す
+                if (aTrainer.fruits > 0) {
+                    System.out.println("フルーツを投げた！捕まえやすさが倍になる！");
+                    aTrainer.fruits--;
+                    r = r * 2;
+                }
+                return r;
+            }).forEach(r -> {
+                System.out.println(this.monsterZukan.get(m) + "にボールを投げた");
+                aTrainer.balls--;
+                if (this.monsterZukan.get(m).getRare() <= r) {//monsterRare[m]の値がr以下の場合
+                    System.out.println(this.monsterZukan.get(m) + "を捕まえた！");
+                    aTrainer.userMonster.add(this.monsterZukan.get(m));
+                    /*
+                    for (int j = 0; j < aTrainer.userMonster.size(); j++) {
+                        if (aTrainer.userMonster[j] == null) {
+                            aTrainer.userMonster[j] = this.monsterZukan.get(m);
+                            break;
+                        }
+                    }
+                    */
+                    // return;//ボール投げ終了
+                } else {
+                    System.out.println(this.monsterZukan.get(m) + "に逃げられた！");
+                }
+            });
+            /*
             for (int i = 0; i < 3 && aTrainer.balls > 0; i++) {//捕まえる or 3回ボールを投げるまで繰り返す
                 int r = (int) (6 * Math.random());//0~5までの数字をランダムに返す
                 if (aTrainer.fruits > 0) {
@@ -127,13 +157,15 @@ public class MonsterZoo {
                             break;
                         }
                     }
-                    */
+                    *//*
                     break;//ボール投げ終了
                 } else {
                     System.out.println(this.monsterZukan.get(m) + "に逃げられた！");
                 }
             }
+            */
         }
+
     }
 
     private void hatch() {

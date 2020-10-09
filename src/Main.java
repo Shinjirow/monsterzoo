@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Main {
     private MonsterZoo pz = new MonsterZoo();
@@ -40,11 +41,15 @@ public class Main {
     private void printResult() {
         System.out.println("ボールがなくなった！");
 
+        pz.getUserMonster().stream()
+                .filter(Objects::nonNull)
+                .forEach(e -> System.out.println(e + "を捕まえた．"));
+        /*
         for (int i = 0; i < pz.getUserMonster().size(); i++) {
             if (pz.getUserMonster().get(i) != null) {
                 System.out.println(pz.getUserMonster().get(i) + "を捕まえた．");
             }
-        }
+        }*/
     }
 
     //テスト用のモンスターデータを登録するメソッド
