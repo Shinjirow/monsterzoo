@@ -1,4 +1,5 @@
-
+import java.util.List;
+import java.util.ArrayList;
 
 public class Main {
     private MonsterZoo pz = new MonsterZoo();
@@ -39,61 +40,63 @@ public class Main {
     private void printResult() {
         System.out.println("ボールがなくなった！");
 
-        for (int i = 0; i < pz.getUserMonster().length; i++) {
-            if (pz.getUserMonster()[i] != null) {
-                System.out.println(pz.getUserMonster()[i] + "を捕まえた．");
+        for (int i = 0; i < pz.getUserMonster().size(); i++) {
+            if (pz.getUserMonster().get(i) != null) {
+                System.out.println(pz.getUserMonster().get(i) + "を捕まえた．");
             }
         }
     }
 
     //テスト用のモンスターデータを登録するメソッド
     private void setMonsterZukan() {
-        String tempMonster[] = new String[22];
-        double tempMonsterRare[] = new double[22];
-        tempMonster[0] = "イガキン";
-        tempMonsterRare[0] = 9;
-        tempMonster[1] = "ナマチュウ";
-        tempMonsterRare[1] = 3;
-        tempMonster[2] = "イノウエン";
-        tempMonsterRare[2] = 1;
-        tempMonster[3] = "リョージィ";
-        tempMonsterRare[3] = 2;
-        tempMonster[4] = "アキモトン";
-        tempMonsterRare[4] = 5;
-        tempMonster[5] = "ゴージマ";
-        tempMonsterRare[5] = 4;
-        tempMonster[6] = "チュウデン";
-        tempMonsterRare[6] = 6;
-        tempMonster[7] = "ヅカホン";
-        tempMonsterRare[7] = 8;
-        tempMonster[8] = "ニシムラー";
-        tempMonsterRare[8] = 7;
-        tempMonster[9] = "サコーデン";
-        tempMonsterRare[9] = 2;
-        tempMonster[10] = "ウッチー";
-        tempMonsterRare[10] = 5;
-        tempMonster[11] = "ハヤッシー";
-        tempMonsterRare[11] = 4;
-        tempMonster[12] = "キーチー";
-        tempMonsterRare[12] = 3;
-        tempMonster[13] = "リョクン";
-        tempMonsterRare[13] = 1;
-        tempMonster[14] = "デコポン";
-        tempMonsterRare[14] = 6;
-        tempMonster[15] = "カミサン";
-        tempMonsterRare[15] = 5;
-        tempMonster[16] = "シスイ";
-        tempMonsterRare[16] = 1;
-        tempMonster[17] = "ジョナ";
-        tempMonsterRare[17] = 7;
-        tempMonster[18] = "ギダギダ";
-        tempMonsterRare[18] = 2;
-        tempMonster[19] = "ミッツー";
-        tempMonsterRare[19] = 8;
-        tempMonster[20] = "ゾエサン";
-        tempMonsterRare[20] = 5;
-        tempMonster[21] = "キタバー";
-        tempMonsterRare[21] = 3;
+        List<String> tempMonster = new ArrayList<>(22);
+        // String tempMonster[] = new String[22];
+        List<Integer> tempMonsterRare = new ArrayList<>(22);
+        // double tempMonsterRare[] = new double[22];
+        tempMonster.add(0, "イガキン");
+        tempMonsterRare.add(0, 9);
+        tempMonster.add(1, "ナマチュウ");
+        tempMonsterRare.add(1, 3);
+        tempMonster.add(2, "イノウエン");
+        tempMonsterRare.add(2, 1);
+        tempMonster.add(3, "リョージィ");
+        tempMonsterRare.add(3, 2);
+        tempMonster.add(4, "アキモトン");
+        tempMonsterRare.add(4, 5);
+        tempMonster.add(5, "ゴージマ");
+        tempMonsterRare.add(5, 4);
+        tempMonster.add(6, "チュウデン");
+        tempMonsterRare.add(6, 6);
+        tempMonster.add(7, "ヅカホン");
+        tempMonsterRare.add(7, 8);
+        tempMonster.add(8, "ニシムラー");
+        tempMonsterRare.add(8, 7);
+        tempMonster.add(9, "サコーデン");
+        tempMonsterRare.add(9, 2);
+        tempMonster.add(10, "ウッチー");
+        tempMonsterRare.add(10, 5);
+        tempMonster.add(11, "ハヤッシー");
+        tempMonsterRare.add(11, 4);
+        tempMonster.add(12, "キーチー");
+        tempMonsterRare.add(12, 3);
+        tempMonster.add(13, "リョクン");
+        tempMonsterRare.add(13, 1);
+        tempMonster.add(14, "デコポン");
+        tempMonsterRare.add(14, 6);
+        tempMonster.add(15, "カミサン");
+        tempMonsterRare.add(15, 5);
+        tempMonster.add(16, "シスイ");
+        tempMonsterRare.add(16, 1);
+        tempMonster.add(17, "ジョナ");
+        tempMonsterRare.add(17, 7);
+        tempMonster.add(18, "ギダギダ");
+        tempMonsterRare.add(18, 2);
+        tempMonster.add(19, "ミッツー");
+        tempMonsterRare.add(19, 8);
+        tempMonster.add(20, "ゾエサン");
+        tempMonsterRare.add(20, 5);
+        tempMonster.add(21, "キタバー");
+        tempMonsterRare.add(21, 3);
 
         pz.setMonsterZukan(tempMonster);
         pz.setMonsterRare(tempMonsterRare);

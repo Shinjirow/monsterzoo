@@ -1,4 +1,5 @@
-
+import java.util.List;
+import java.util.ArrayList;
 
 public class MonsterZoo {
     /*
@@ -18,8 +19,10 @@ public class MonsterZoo {
 
     //モンスター図鑑．モンスターの名前とレア度(0.0~9.0)がそれぞれの配列に保存されている
     //レア度が高いほうが捕まえにくい
-    String monsterZukan[] = new String[22];
-    double monsterRare[] = new double[22];
+    List<String> monsterZukan = new ArrayList<>(22);
+    // String monsterZukan[] = new String[22];
+    List<Integer> monsterRare = new ArrayList<>(22);
+    // double monsterRare[] = new double[22];
 
     Trainer aTrainer = new Trainer();
 
@@ -43,15 +46,15 @@ public class MonsterZoo {
         return aTrainer.fruits;
     }
 
-    public String[] getUserMonster() {
+    public List<String> getUserMonster() {
         return aTrainer.userMonster;
     }
 
-    public void setMonsterZukan(String[] monsterZukan) {
+    public void setMonsterZukan(List<String> monsterZukan) {
         this.monsterZukan = monsterZukan;
     }
 
-    public void setMonsterRare(double[] monsterRare) {
+    public void setMonsterRare(List<Integer> monsterRare) {
         this.monsterRare = monsterRare;
     }
 
@@ -80,17 +83,23 @@ public class MonsterZoo {
             aTrainer.fruits = aTrainer.fruits + f;
             if (e >= 1) {//卵を1つ以上Getしたら
                 //egg[]に10個以上卵がない場合は新しい卵データをセットする
-                for (int i = 0; i < aTrainer.eggDistance.length; i++) {
-                    if (aTrainer.egg[i] == false) {
-                        aTrainer.egg[i] = true;
-                        aTrainer.eggDistance[i] = 0.0;
+                if (aTrainer.eggDistance.size() < 10) {
+                    aTrainer.egg.add(true);
+                    aTrainer.eggDistance.add(0);
+                }
+                /*
+                for (int i = 0; i < aTrainer.eggDistance.size(); i++) {
+                    if (aTrainer.egg.get(i) == false) {
+                        aTrainer.egg.add(i, true);
+                        aTrainer.eggDistance.add(i, 0);
                         break;
                     }
                 }
+                */
             }
         } else if (flg1 >= 7) {
-            int m = (int) (this.monsterZukan.length * Math.random());//monsterZukanからランダムにモンスターを出す
-            System.out.println(this.monsterZukan[m] + "が現れた！");
+            int m = (int) (this.monsterZukan.size() * Math.random());//monsterZukanからランダムにモンスターを出す
+            System.out.println(this.monsterZukan.get(m) + "が現れた！");
             for (int i = 0; i < 3 && aTrainer.balls > 0; i++) {//捕まえる or 3回ボールを投げるまで繰り返す
                 int r = (int) (6 * Math.random());//0~5までの数字をランダムに返す
                 if (aTrainer.fruits > 0) {
@@ -98,19 +107,22 @@ public class MonsterZoo {
                     aTrainer.fruits--;
                     r = r * 2;
                 }
-                System.out.println(this.monsterZukan[m] + "にボールを投げた");
+                System.out.println(this.monsterZukan.get(m) + "にボールを投げた");
                 aTrainer.balls--;
-                if (this.monsterRare[m] <= r) {//monsterRare[m]の値がr以下の場合
-                    System.out.println(this.monsterZukan[m] + "を捕まえた！");
-                    for (int j = 0; j < aTrainer.userMonster.length; j++) {
+                if (this.monsterRare.get(m) <= r) {//monsterRare[m]の値がr以下の場合
+                    System.out.println(this.monsterZukan.get(m) + "を捕まえた！");
+                    aTrainer.userMonster.add(this.monsterZukan.get(m));
+                    /*
+                    for (int j = 0; j < aTrainer.userMonster.size(); j++) {
                         if (aTrainer.userMonster[j] == null) {
-                            aTrainer.userMonster[j] = this.monsterZukan[m];
+                            aTrainer.userMonster[j] = this.monsterZukan.get(m);
                             break;
                         }
                     }
+                    */
                     break;//ボール投げ終了
                 } else {
-                    System.out.println(this.monsterZukan[m] + "に逃げられた！");
+                    System.out.println(this.monsterZukan.get(m) + "に逃げられた！");
                 }
             }
         }
@@ -118,20 +130,28 @@ public class MonsterZoo {
 
     private void hatch() {
         // 卵の孵化処理
-        for (int i = 0; i < aTrainer.egg.length; i++) {
-            if (aTrainer.egg[i] == true && aTrainer.eggDistance[i] >= 3) {
+        for (int i = 0; i < aTrainer.egg.size(); i++) {
+            if (aTrainer.egg.get(i) == true && aTrainer.eggDistance.get(i) >= 3) {
                 System.out.println("卵が孵った！");
-                int m = (int) (this.monsterZukan.length * Math.random());
-                System.out.println(this.monsterZukan[m] + "が産まれた！");
+                int m = (int) (this.monsterZukan.size() * Math.random());
+                System.out.println(this.monsterZukan.get(m) + "が産まれた！");
 
+                aTrainer.userMonster.add(this.monsterZukan.get(m));
+                /*
                 for (int j = 0; j < aTrainer.userMonster.length; j++) {
                     if (aTrainer.userMonster[j] == null) {
-                        aTrainer.userMonster[j] = this.monsterZukan[m];
+                        aTrainer.userMonster[j] = this.monsterZukan.get(m);
                         break;
                     }
                 }
-                aTrainer.egg[i] = false;
-                aTrainer.eggDistance[i] = 0.0;
+                */
+
+                aTrainer.egg.remove(i);
+                aTrainer.eggDistance.remove(i);
+                /*
+                aTrainer.egg.set(i, false);
+                aTrainer.eggDistance.set(i, 0);
+                */
             }
         }
     }
