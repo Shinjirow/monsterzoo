@@ -1,4 +1,5 @@
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class User {
     private Distance distance = new Distance();//歩いた距離
@@ -24,11 +25,15 @@ public class User {
     }
 
     public void tryToCatch(Monster m) {
+        IntStream.range(0, this.items.chanceOfThrow())
+                .anyMatch(i -> this.challenge(m));
+
+        /*
         for (int i = 0; i < this.items.chanceOfThrow(); i++) {
             if (this.challenge(m)) {
                 break;
             }
-        }
+        }*/
     }
 
     private boolean challenge(Monster m) {
