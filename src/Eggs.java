@@ -22,7 +22,7 @@ public class Eggs {
                 .map(Egg::hatch);
         Monsters m = new Monsters(monsters);
 
-        this.eggs.stream()
+        this.eggs = this.eggs.stream()
                 .filter(e -> !e.canHatch())
                 .collect(Collectors.toList());
 

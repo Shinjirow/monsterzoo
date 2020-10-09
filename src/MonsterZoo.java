@@ -1,8 +1,3 @@
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.stream.IntStream;
-
 public class MonsterZoo {
     /*
     double distance = 0.0;//歩いた距離
@@ -25,21 +20,21 @@ public class MonsterZoo {
     // List<Integer> monsterRare = new ArrayList<>(22);
     // double monsterRare[] = new double[22];
 
-    private Trainer aTrainer = new Trainer();
+    private User aUser = new User();
 
     public MonsterZoo() {
     }
 
     //呼び出すと1km distanceが増える
     void move() {
-        aTrainer.walk();
+        aUser.walk();
         // this.addDistanceToEggs();
         this.checkEncounter();
         this.hatch();
     }
 
     public boolean hasBalls() {
-        return aTrainer.hasBalls();
+        return aUser.hasBalls();
     }
 
     /*
@@ -76,12 +71,12 @@ public class MonsterZoo {
             int e = (int) (Math.random() * 2);
             System.out.println("ボールを" + b + "個，" + "フルーツを" + f + "個" + "卵を" + e + "個Getした！");
             // aTrainer.balls = aTrainer.balls + b;
-            aTrainer.addBalls(b);
+            aUser.addBalls(b);
             // aTrainer.fruits = aTrainer.fruits + f;
-            aTrainer.addFruits(f);
+            aUser.addFruits(f);
             if (e >= 1) {//卵を1つ以上Getしたら
                 //egg[]に10個以上卵がない場合は新しい卵データをセットする
-                aTrainer.addEggs(e);
+                aUser.addEggs(e);
 
                 /*
                 if (aTrainer.eggs.size() < 10) {
@@ -110,7 +105,7 @@ public class MonsterZoo {
             Monster m = Monsters.randomCall();
             System.out.println(m + "が現れた！");
 
-            aTrainer.tryToCatch(m);
+            aUser.tryToCatch(m);
 
             /*
             for (int i = 0; i < 3 && aTrainer.balls > 0; i++) {//捕まえる or 3回ボールを投げるまで繰り返す
@@ -145,7 +140,7 @@ public class MonsterZoo {
 
     private void hatch() {
         // 卵の孵化処理
-        this.aTrainer.hatchEggs();
+        this.aUser.hatchEggs();
 
         /*
         for (int i = 0; i < aTrainer.eggs.size(); i++) {
@@ -175,7 +170,7 @@ public class MonsterZoo {
     }
 
     public void printCurrentResult() {
-        aTrainer.printCurrentResult();
+        aUser.printCurrentResult();
         /*
         System.out.println("手持ちのボールは" + aTrainer.balls + "個，フルーツは" + aTrainer.fruits + "個");
         System.out.println(aTrainer.distance + "km歩いた．");
@@ -183,7 +178,7 @@ public class MonsterZoo {
     }
 
     public void printFinalResult() {
-        aTrainer.printFinalResult();
+        aUser.printFinalResult();
         /*
         aTrainer.userMonster.stream()
                 .filter(Objects::nonNull)
