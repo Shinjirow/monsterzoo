@@ -1,9 +1,4 @@
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class User {
     private Distance distance = new Distance();//歩いた距離
