@@ -12,19 +12,17 @@ public class Trainer {
     //ユーザがGetしたモンスター一覧
     String userMonster[] = new String[100];
 
-    public double getDistance() {
-        return distance;
+    public void walk() {
+        this.distance++;
+        this.addDistanceToEggs();
     }
 
-    public int getBalls() {
-        return balls;
-    }
-
-    public int getFruits() {
-        return fruits;
-    }
-
-    public String[] getUserMonster() {
-        return userMonster;
+    private void addDistanceToEggs() {
+        // 卵の距離加算処理
+        for (int i = 0; i < this.egg.length; i++) {//卵は移動距離が進むと孵化するため，何km移動したかを更新する
+            if (this.egg[i] == true) {
+                this.eggDistance[i]++;
+            }
+        }
     }
 }

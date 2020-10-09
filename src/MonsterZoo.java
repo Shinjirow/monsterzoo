@@ -25,9 +25,8 @@ public class MonsterZoo {
 
     //呼び出すと1km distanceが増える
     void move() {
-        aTrainer.distance++;
-
-        this.addDistanceToEggs();
+        aTrainer.walk();
+        // this.addDistanceToEggs();
         this.checkEncounter();
         this.hatch();
     }
@@ -56,6 +55,7 @@ public class MonsterZoo {
         this.monsterRare = monsterRare;
     }
 
+    /*
     private void addDistanceToEggs() {
         // 卵の距離加算処理
         for (int i = 0; i < aTrainer.egg.length; i++) {//卵は移動距離が進むと孵化するため，何km移動したかを更新する
@@ -64,6 +64,8 @@ public class MonsterZoo {
             }
         }
     }
+
+    */
 
     private void checkEncounter() {
         // エンカウント処理
