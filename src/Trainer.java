@@ -14,7 +14,7 @@ public class Trainer {
     //移動するたびに,eggDistanceに1.0kmずつ加算される．
     //3km移動するとランダムでモンスターが孵る
 
-    private List<Egg> eggs = new ArrayList<>(9);
+    private Eggs eggs = new Eggs();
     // List<Integer> eggDistance = new ArrayList<>(9);
     // double eggDistance[] = new double[9];
     // List<Boolean> egg = new ArrayList<>(9);
@@ -37,9 +37,7 @@ public class Trainer {
     }
 
     public void addEggs(int v) {
-        if (this.eggs.size() < 10) {
-            this.eggs.add(new Egg());
-        }
+        this.eggs.addEgg();
     }
 
     // バグっています　要修正
@@ -74,20 +72,11 @@ public class Trainer {
     }
 
     public void hatchEggs() {
-
-        Stream<Monster> monsters = this.eggs.stream()
-                .filter(Egg::canHatch)
-                .map(Egg::hatch);
-
-        this.eggs = this.eggs.stream()
-                .filter(e -> !e.canHatch())
-                .collect(Collectors.toList());
-
-        this.userMonsters.add(monsters);
+        Monsters monsters = this.eggs.hatch();
+        this.userMonsters.addAll(monsters);
     }
 
     public void printCurrentResult() {
-
         System.out.println("手持ちのボールは" + this.balls + "個，フルーツは" + this.fruits + "個");
         System.out.println(this.distance + "km歩いた．");
     }
@@ -105,7 +94,8 @@ public class Trainer {
 
     private void addDistanceToEggs() {
         // 卵の距離加算処理
-        eggs.forEach(Egg::addDistance);
+        eggs.addDistance();
+        // eggs.forEach(Egg::addDistance);
         /*
         for (int i = 0; i < this.egg.size(); i++) {//卵は移動距離が進むと孵化するため，何km移動したかを更新する
             if (this.egg.get(i) == true) {

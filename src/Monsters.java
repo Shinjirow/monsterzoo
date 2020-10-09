@@ -31,10 +31,15 @@ public class Monsters {
         add(new Monster("キタバー", 3));
     }});
 
-    List<Monster> monsters;
+    private List<Monster> monsters;
 
     public Monsters(int initialCapacity) {
         this.monsters = new ArrayList<>(initialCapacity);
+    }
+
+    public Monsters(Stream<Monster> stream) {
+        this.monsters = new ArrayList<>();
+        stream.forEach(monsters::add);
     }
 
     public static Monster randomCall() {
