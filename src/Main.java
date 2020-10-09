@@ -1,12 +1,23 @@
 
 
 public class Main {
-    static MonsterZoo pz = new MonsterZoo();
+    private MonsterZoo pz = new MonsterZoo();
 
     public static void main(String[] args) {
+        new Main().run();
+    }
 
-        setMonsterZukan();
+    private void run() {
+        this.init();
+        this.loop();
+        this.printResult();
+    }
 
+    private void init() {
+        this.setMonsterZukan();
+    }
+
+    private void loop() {
         //1000ミリ秒（1秒）ずつ止まりながらpz.move()を呼び出し続ける
         //手持ちのボールが無くなったら終了
         while (true) {
@@ -23,7 +34,9 @@ public class Main {
                 e.printStackTrace();
             }
         }
+    }
 
+    private void printResult() {
         System.out.println("ボールがなくなった！");
 
         for (int i = 0; i < pz.getUserMonster().length; i++) {
@@ -34,7 +47,7 @@ public class Main {
     }
 
     //テスト用のモンスターデータを登録するメソッド
-    public static void setMonsterZukan() {
+    private void setMonsterZukan() {
         String tempMonster[] = new String[22];
         double tempMonsterRare[] = new double[22];
         tempMonster[0] = "イガキン";
@@ -85,5 +98,4 @@ public class Main {
         pz.setMonsterZukan(tempMonster);
         pz.setMonsterRare(tempMonsterRare);
     }
-
 }

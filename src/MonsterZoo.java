@@ -26,12 +26,47 @@ public class MonsterZoo {
     //呼び出すと1km distanceが増える
     void move() {
         aTrainer.distance++;
+
+        this.addDistanceToEggs();
+        this.checkEncounter();
+        this.hatch();
+    }
+
+    public double getDistance() {
+        return aTrainer.distance;
+    }
+
+    public int getBalls() {
+        return aTrainer.balls;
+    }
+
+    public int getFruits() {
+        return aTrainer.fruits;
+    }
+
+    public String[] getUserMonster() {
+        return aTrainer.userMonster;
+    }
+
+    public void setMonsterZukan(String[] monsterZukan) {
+        this.monsterZukan = monsterZukan;
+    }
+
+    public void setMonsterRare(double[] monsterRare) {
+        this.monsterRare = monsterRare;
+    }
+
+    private void addDistanceToEggs() {
+        // 卵の距離加算処理
         for (int i = 0; i < aTrainer.egg.length; i++) {//卵は移動距離が進むと孵化するため，何km移動したかを更新する
             if (aTrainer.egg[i] == true) {
                 aTrainer.eggDistance[i]++;
             }
         }
+    }
 
+    private void checkEncounter() {
+        // エンカウント処理
         int flg1 = (int) (Math.random() * 10);//0,1の場合はズーstation，7~9の場合はモンスター
         if (flg1 <= 1) {
             System.out.println("ズーstationを見つけた！");
@@ -77,6 +112,10 @@ public class MonsterZoo {
                 }
             }
         }
+    }
+
+    private void hatch() {
+        // 卵の孵化処理
         for (int i = 0; i < aTrainer.egg.length; i++) {
             if (aTrainer.egg[i] == true && aTrainer.eggDistance[i] >= 3) {
                 System.out.println("卵が孵った！");
@@ -93,29 +132,5 @@ public class MonsterZoo {
                 aTrainer.eggDistance[i] = 0.0;
             }
         }
-    }
-
-    public double getDistance() {
-        return aTrainer.distance;
-    }
-
-    public int getBalls() {
-        return aTrainer.balls;
-    }
-
-    public int getFruits() {
-        return aTrainer.fruits;
-    }
-
-    public String[] getUserMonster() {
-        return aTrainer.userMonster;
-    }
-
-    public void setMonsterZukan(String[] monsterZukan) {
-        this.monsterZukan = monsterZukan;
-    }
-
-    public void setMonsterRare(double[] monsterRare) {
-        this.monsterRare = monsterRare;
     }
 }
