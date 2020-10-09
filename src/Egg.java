@@ -12,4 +12,12 @@ public class Egg {
     public boolean canHatch() {
         return this.distance >= 3;
     }
+
+    public Monster hatch() {
+        System.out.println("卵が孵った！");
+        Monster newFace = Monsters.randomCall();
+        System.out.println(newFace + "が産まれた！");
+
+        return newFace;
+    }
 }
