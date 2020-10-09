@@ -21,15 +21,11 @@ public class Main {
     private void loop() {
         //1000ミリ秒（1秒）ずつ止まりながらpz.move()を呼び出し続ける
         //手持ちのボールが無くなったら終了
-        while (true) {
+        while (pz.hasBalls()) {
             try {
                 Thread.sleep(1000);
-                if (pz.hasBalls()) {
-                    pz.move();
-                    pz.printCurrentResult();
-                } else {
-                    break;
-                }
+                pz.move();
+                pz.printCurrentResult();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
