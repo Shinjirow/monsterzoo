@@ -21,15 +21,13 @@ public class MonsterZoo {
 
     //モンスター図鑑．モンスターの名前とレア度(0.0~9.0)がそれぞれの配列に保存されている
     //レア度が高いほうが捕まえにくい
-    private List<Monster> monsterZukan = new ArrayList<>(22);
     // String monsterZukan[] = new String[22];
     // List<Integer> monsterRare = new ArrayList<>(22);
     // double monsterRare[] = new double[22];
 
     private Trainer aTrainer = new Trainer();
 
-    public MonsterZoo(List<Monster> monsterZukan) {
-        this.monsterZukan = monsterZukan;
+    public MonsterZoo() {
     }
 
     //呼び出すと1km distanceが増える
@@ -109,7 +107,7 @@ public class MonsterZoo {
             }
         } else if (flg1 >= 7) {
             //monsterZukanからランダムにモンスターを出す
-            Monster m = this.monsterZukan.get((int) (this.monsterZukan.size() * Math.random()));
+            Monster m = Monsters.randomCall();
             System.out.println(m + "が現れた！");
 
             aTrainer.tryToCatch(m);

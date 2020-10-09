@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Trainer {
     private double distance = 0.0;//歩いた距離
@@ -20,7 +21,7 @@ public class Trainer {
     // boolean egg[] = new boolean[9];
 
     //ユーザがGetしたモンスター一覧
-    private List<Monster> userMonster = new ArrayList<>(100);
+    private Monsters userMonsters = new Monsters(100);
     // String userMonster[] = new String[100];
 
     public boolean hasBalls() {
@@ -56,7 +57,7 @@ public class Trainer {
             this.balls--;
             if (m.canCatch(r)) {
                 System.out.println(m + "を捕まえた！");
-                this.userMonster.add(m);
+                this.userMonsters.add(m);
                     /*
                     for (int j = 0; j < aTrainer.userMonster.size(); j++) {
                         if (aTrainer.userMonster[j] == null) {
@@ -74,16 +75,15 @@ public class Trainer {
 
     public void hatchEggs() {
 
-        List<Monster> monsters = this.eggs.stream()
+        Stream<Monster> monsters = this.eggs.stream()
                 .filter(Egg::canHatch)
-                .map(Egg::hatch)
-                .collect(Collectors.toList());
+                .map(Egg::hatch);
 
         this.eggs = this.eggs.stream()
                 .filter(e -> !e.canHatch())
                 .collect(Collectors.toList());
 
-        this.userMonster.addAll(monsters);
+        this.userMonsters.add(monsters);
     }
 
     public void printCurrentResult() {
@@ -93,7 +93,7 @@ public class Trainer {
     }
 
     public void printFinalResult() {
-        this.userMonster.stream()
+        this.userMonsters.stream()
                 .filter(Objects::nonNull)
                 .forEach(e -> System.out.println(e + "を捕まえた．"));
     }

@@ -1,8 +1,11 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Monsters {
+
+    // テスト用のモンスターデータ
     private static final List<Monster> monstersList = Collections.unmodifiableList(new ArrayList<>(22) {{
         add(new Monster("イガキン", 9));
         add(new Monster("ナマチュウ", 3));
@@ -28,11 +31,30 @@ public class Monsters {
         add(new Monster("キタバー", 3));
     }});
 
-    public void init() {
+    List<Monster> monsters;
 
+    public Monsters(int initialCapacity) {
+        this.monsters = new ArrayList<>(initialCapacity);
     }
 
     public static Monster randomCall() {
         return Monsters.monstersList.get((int) (Monsters.monstersList.size() * Math.random()));
+    }
+
+    public void add(Monster m) {
+        this.monsters.add(m);
+    }
+
+    public void add(Stream<Monster> m) {
+        m.forEach(monsters::add);
+    }
+
+    public void addAll(Monsters monsters) {
+        this.monsters.addAll(monsters.monsters);
+    }
+
+
+    public Stream<Monster> stream() {
+        return monsters.stream();
     }
 }
